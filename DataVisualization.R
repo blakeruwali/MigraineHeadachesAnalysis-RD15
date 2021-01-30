@@ -8,7 +8,7 @@ migraine <- read.csv(file = 'G15dataset_KosteckiDillon.csv')
 # Printing the data
 head(migraine)
 
-# Use reshape2
+# Use dplyr
 library(dplyr)
 
 viz1_pre <- migraine %>%
@@ -24,11 +24,14 @@ head(viz1_final)
 bp<- ggplot(viz1_final, aes(x="", y=female, fill=headache))+
   geom_bar(width = 1, stat = "identity")
 pie <- bp + coord_polar("y", start=0)
+pie <- pie + ggtitle("Headache for Female") # Adds titles
+
 pie
 
 bp2<- ggplot(viz1_final, aes(x="", y=male, fill=headache))+
   geom_bar(width = 1, stat = "identity")
 pie2 <- bp2 + coord_polar("y", start=0)
+pie2 <- pie2 + ggtitle("Headache for Male") 
 pie2
 
 p = ggplot(viz1_pre, aes(x = factor(1), y = n, fill = factor(headache))) + 
