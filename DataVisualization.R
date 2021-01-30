@@ -1,6 +1,10 @@
 # Importing the library
 library(ggplot2)
 
+library(ggrepel)
+library(forcats)
+library(scales)
+
 
 # Reading the file
 migraine <- read.csv(file = 'G15dataset_KosteckiDillon.csv')
@@ -20,6 +24,10 @@ library(tidyr)
 
 viz1_final <-viz1_pre %>% spread(sex,n)
 head(viz1_final)
+
+viz1_final %>%
+  arrange(desc(no)) %>%
+  mutate(prop = percent(value / sum(value))) -> mydf 
 
 bp<- ggplot(viz1_final, aes(x="", y=female, fill=headache))+
   geom_bar(width = 1, stat = "identity")
